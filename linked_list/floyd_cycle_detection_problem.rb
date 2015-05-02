@@ -9,20 +9,20 @@ class Node
 end
 
 class FlyodDetector
-  attr_reader :list, :tortoise, :hase
-  private :tortoise, :hase, :list
+  attr_reader :list, :tortoise, :hare
+  private :tortoise, :hare, :list
 
   def initialize(list)
     @list = @tortoise = list
-    @hase = list.next_node if list
+    @hare = list.next_node if list
   end
 
-  def cyclic?(_tortoise = tortoise, _hase = hase)
-    return false if _tortoise.nil? || _hase.nil? || _hase.next_node.nil?
+  def cyclic?(_tortoise = tortoise, _hare = hare)
+    return false if _tortoise.nil? || _hare.nil? || _hare.next_node.nil?
 
-    _tortoise, _hase = _tortoise.next_node, _hase.next_node.next_node
+    _tortoise, _hare = _tortoise.next_node, _hare.next_node.next_node
 
-    _tortoise == _hase ? true : cyclic?(_tortoise, _hase)
+    _tortoise == _hare ? true : cyclic?(_tortoise, _hare)
   end
 end
 
